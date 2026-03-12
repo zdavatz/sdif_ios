@@ -46,3 +46,14 @@ targets:
           - UIInterfaceOrientationPortraitUpsideDown
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
+
+  SDIFUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - SDIFUITests
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: SDIF
