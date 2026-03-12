@@ -9,6 +9,20 @@ final class ScreenshotTests: XCTestCase {
         app.launch()
     }
 
+    private func tapTab(_ name: String) {
+        // iPhone uses tabBars, iPad uses a toolbar/sidebar
+        let tabButton = app.tabBars.buttons[name]
+        if tabButton.exists {
+            tabButton.tap()
+        } else {
+            // iPad: try buttons anywhere
+            let button = app.buttons[name]
+            if button.waitForExistence(timeout: 3) {
+                button.tap()
+            }
+        }
+    }
+
     func testGenerateScreenshots() throws {
         let screenshotDir = ProcessInfo.processInfo.environment["SCREENSHOT_DIR"] ?? "/tmp/sdif_screenshots"
 
@@ -46,7 +60,7 @@ final class ScreenshotTests: XCTestCase {
         saveScreenshot(name: "02_interaktionen", dir: screenshotDir)
 
         // Tab 2: Klinische Suche
-        app.tabBars.buttons["Klinische Suche"].tap()
+        tapTab("Klinische Suche")
         sleep(1)
 
         let searchField2 = app.textFields.firstMatch
@@ -69,11 +83,10 @@ final class ScreenshotTests: XCTestCase {
         saveScreenshot(name: "04_klinische_suche_resultate", dir: screenshotDir)
 
         // Tab 3: ATC-Klassen
-        app.tabBars.buttons["ATC-Klassen"].tap()
+        tapTab("ATC-Klassen")
         // Wait until loading spinner disappears (heavy computation)
         let loadingText = app.staticTexts["ATC-Klassen werden analysiert..."]
         if loadingText.waitForExistence(timeout: 5) {
-            // Now wait for it to go away
             let disappeared = NSPredicate(format: "exists == false")
             expectation(for: disappeared, evaluatedWith: loadingText)
             waitForExpectations(timeout: 120)
@@ -99,7 +112,6 @@ final class ScreenshotTests: XCTestCase {
         attachment.lifetime = .keepAlways
         add(attachment)
 
-        // Also save to disk
         let fileManager = FileManager.default
         try? fileManager.createDirectory(atPath: dir, withIntermediateDirectories: true)
         let path = "\(dir)/\(name).png"

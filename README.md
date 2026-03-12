@@ -4,6 +4,8 @@ Native iOS app for the Swiss Drug Interaction Finder (SDIF). Ported from the [Ru
 
 ## Screenshots
 
+### iPhone
+
 | Medikamentensuche | Interaktionen | Klinische Vorschläge |
 |---|---|---|
 | ![Search](screenshots/01_suche_aspirin.png) | ![Interactions](screenshots/02_interaktionen.png) | ![Clinical](screenshots/03_klinische_suche_vorschlaege.png) |
@@ -11,6 +13,16 @@ Native iOS app for the Swiss Drug Interaction Finder (SDIF). Ported from the [Ru
 | Klinische Resultate | ATC-Klassen | Einstellungen |
 |---|---|---|
 | ![Results](screenshots/04_klinische_suche_resultate.png) | ![ATC](screenshots/05_atc_klassen.png) | ![Settings](screenshots/06_einstellungen.png) |
+
+### iPad
+
+| Medikamentensuche | Interaktionen | Klinische Vorschläge |
+|---|---|---|
+| ![Search](screenshots/ipad/01_suche_aspirin.png) | ![Interactions](screenshots/ipad/02_interaktionen.png) | ![Clinical](screenshots/ipad/03_klinische_suche_vorschlaege.png) |
+
+| Klinische Resultate | ATC-Klassen | Einstellungen |
+|---|---|---|
+| ![Results](screenshots/ipad/04_klinische_suche_resultate.png) | ![ATC](screenshots/ipad/05_atc_klassen.png) | ![Settings](screenshots/ipad/06_einstellungen.png) |
 
 ## Features
 
@@ -57,11 +69,16 @@ xcodebuild -project SDIF.xcodeproj -scheme SDIF \
 Screenshots are generated automatically via UI tests:
 
 ```bash
+# iPhone (1284x2778 for App Store 6.5")
 xcodebuild test -project SDIF.xcodeproj -scheme SDIFUITests \
-  -destination 'platform=iOS Simulator,name=iPhone 16 Pro Max'
+  -destination 'platform=iOS Simulator,name=iPhone 15 Plus'
+
+# iPad (2064x2752 for App Store 13")
+xcodebuild test -project SDIF.xcodeproj -scheme SDIFUITests \
+  -destination 'platform=iOS Simulator,name=iPad Pro 13-inch (M4)'
 ```
 
-Output is saved to `screenshots/` and includes an `app_preview.mp4` video.
+Output is saved to `screenshots/` (iPhone) and `screenshots/ipad/` (iPad). Includes `app_preview.mp4` video.
 
 ## Database
 
