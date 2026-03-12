@@ -16,6 +16,18 @@ struct InteractionCardView: View {
 
     @State private var isExpanded = false
 
+    private var copyableText: String {
+        var parts: [String] = [drugLabel]
+        if !source.isEmpty { parts.append("Quelle: \(source)") }
+        parts.append("Einstufung: \(severityLabel)")
+        if let type = interactionType { parts.append("Typ: \(type)") }
+        if let explanation = explanation, !explanation.isEmpty { parts.append(explanation) }
+        parts.append(description)
+        if let hint = fiHint, !hint.isEmpty { parts.append(hint) }
+        if let combo = comboHint, !combo.isEmpty { parts.append(combo) }
+        return parts.joined(separator: "\n")
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             // Header
@@ -26,16 +38,7 @@ struct InteractionCardView: View {
                         .fontWeight(.semibold)
                 }
                 Spacer()
-                HStack(spacing: 6) {
-                    Text(severityLabel)
-                        .font(.caption)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 3)
-                        .background(severityScore.severityColor)
-                        .clipShape(Capsule())
-
+                VStack(alignment: .trailing, spacing: 4) {
                     if !source.isEmpty {
                         Text(source)
                             .font(.system(size: 10, weight: .semibold))
@@ -45,6 +48,14 @@ struct InteractionCardView: View {
                             .foregroundColor(source == "EPha" ? .pink : .blue)
                             .cornerRadius(4)
                     }
+                    Text(severityLabel)
+                        .font(.caption2)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 3)
+                        .background(severityScore.severityColor)
+                        .clipShape(Capsule())
                 }
             }
 
@@ -106,6 +117,14 @@ struct InteractionCardView: View {
                     .padding(.vertical, 3)
                     .background(Color.green.opacity(0.1))
                     .cornerRadius(4)
+            }
+        }
+        .textSelection(.enabled)
+        .contextMenu {
+            Button {
+                UIPasteboard.general.string = copyableText
+            } label: {
+                Label("Alles kopieren", systemImage: "doc.on.doc")
             }
         }
         .padding()

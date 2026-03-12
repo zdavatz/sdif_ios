@@ -7,6 +7,8 @@ Native iOS app for the Swiss Drug Interaction Finder (SDIF). Ported from the [Ru
 - **Interaktions-Check**: Search drugs by brand name or substance, add to basket, check all pairwise interactions
 - **Klinische Suche**: Full-text clinical search across interaction descriptions with type-ahead suggestions and pagination
 - **ATC-Klassen**: Sortable overview table of ATC drug class interactions
+- **Settings**: Tap the app icon (top-left) to open settings and download the latest interaction database from pillbox.oddb.org
+- **Copy support**: Long-press interaction cards to select text or copy all card content (title, source, severity, description)
 
 ### Interaction Detection
 
@@ -40,15 +42,9 @@ xcodebuild -project SDIF.xcodeproj -scheme SDIF \
 # set your development team under Signing & Capabilities, then build.
 ```
 
-## Architecture
-
-- **SwiftUI** with TabView (3 tabs)
-- **SQLite3 C API** — no external dependencies; reads bundled `interactions.db` (copied from the Rust project's `db/` directory)
-- **No network requests** — fully offline
-
 ## Database
 
-The app bundles `SDIF/Resources/interactions.db` from the Rust project at `/path/to/sdif/db/interactions.db`. To update, replace the file and rebuild.
+The app downloads `interactions.db` from `http://pillbox.oddb.org/interactions.db` via Settings. A bundled copy in `SDIF/Resources/` is used as fallback. The database is not tracked in git.
 
 ## License
 
