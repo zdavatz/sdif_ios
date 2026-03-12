@@ -12,6 +12,10 @@ xcodegen generate
 xcodebuild -project SDIF.xcodeproj -scheme SDIF \
   -destination 'platform=iOS Simulator,id=86422F52-1CD5-4E9A-92A6-231FF2BDA72C' build
 
+# Run UI tests / generate screenshots
+xcodebuild test -project SDIF.xcodeproj -scheme SDIFUITests \
+  -destination 'platform=iOS Simulator,name=iPhone 16 Pro Max'
+
 # Physical device requires signing team set in Xcode
 ```
 
@@ -33,6 +37,8 @@ SwiftUI app with 3 tabs, no external dependencies. Uses SQLite3 C API directly.
 - `SDIF/SettingsView.swift` — DB download from pillbox.oddb.org, app info
 - `SDIF/AppIconButton.swift` — reusable toolbar icon that opens settings
 - `SDIF/Resources/interactions.db` — 57MB SQLite database (not tracked in git, gitignored)
+- `SDIFUITests/ScreenshotTests.swift` — automated UI test that generates App Store screenshots and app preview video
+- `screenshots/` — generated screenshots (6 PNGs + app_preview.mp4)
 
 ### Threading
 

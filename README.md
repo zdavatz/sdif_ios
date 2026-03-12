@@ -2,6 +2,16 @@
 
 Native iOS app for the Swiss Drug Interaction Finder (SDIF). Ported from the [Rust web application](https://github.com/zdavatz/sdif).
 
+## Screenshots
+
+| Medikamentensuche | Interaktionen | Klinische Vorschläge |
+|---|---|---|
+| ![Search](screenshots/01_suche_aspirin.png) | ![Interactions](screenshots/02_interaktionen.png) | ![Clinical](screenshots/03_klinische_suche_vorschlaege.png) |
+
+| Klinische Resultate | ATC-Klassen | Einstellungen |
+|---|---|---|
+| ![Results](screenshots/04_klinische_suche_resultate.png) | ![ATC](screenshots/05_atc_klassen.png) | ![Settings](screenshots/06_einstellungen.png) |
+
 ## Features
 
 - **Interaktions-Check**: Search drugs by brand name or substance, add to basket, check all pairwise interactions
@@ -41,6 +51,17 @@ xcodebuild -project SDIF.xcodeproj -scheme SDIF \
 # For physical device: open SDIF.xcodeproj in Xcode,
 # set your development team under Signing & Capabilities, then build.
 ```
+
+## Screenshots Generation
+
+Screenshots are generated automatically via UI tests:
+
+```bash
+xcodebuild test -project SDIF.xcodeproj -scheme SDIFUITests \
+  -destination 'platform=iOS Simulator,name=iPhone 16 Pro Max'
+```
+
+Output is saved to `screenshots/` and includes an `app_preview.mp4` video.
 
 ## Database
 
