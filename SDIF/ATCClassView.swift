@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ATCClassView: View {
+    @Binding var showSettings: Bool
     @State private var classes: [ClassInteractionRow] = []
     @State private var totalPairs = 0
     @State private var isLoading = true
@@ -43,6 +44,11 @@ struct ATCClassView: View {
             }
             .navigationTitle("ATC-Klassen")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    AppIconButton(showSettings: $showSettings)
+                }
+            }
             .task {
                 await loadData()
             }

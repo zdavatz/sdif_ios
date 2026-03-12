@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ClinicalSearchView: View {
+    @Binding var showSettings: Bool
     @State private var searchText = ""
     @State private var suggestions: [TermSuggestion] = []
     @State private var results: [SearchResultItem] = []
@@ -143,6 +144,11 @@ struct ClinicalSearchView: View {
             }
             .navigationTitle("Klinische Suche")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    AppIconButton(showSettings: $showSettings)
+                }
+            }
         }
     }
 

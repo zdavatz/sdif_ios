@@ -33,6 +33,10 @@ targets:
         CFBundleShortVersionString: "1.0"
         CFBundleVersion: "1"
         UILaunchScreen: {}
+        NSAppTransportSecurity:
+          NSExceptionDomains:
+            pillbox.oddb.org:
+              NSExceptionAllowsInsecureHTTPLoads: true
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
           - UIInterfaceOrientationLandscapeLeft

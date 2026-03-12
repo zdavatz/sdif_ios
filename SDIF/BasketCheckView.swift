@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct BasketCheckView: View {
+    @Binding var showSettings: Bool
     @State private var searchText = ""
     @State private var suggestions: [DrugResult] = []
     @State private var basket: [BasketDrug] = []
@@ -108,6 +109,9 @@ struct BasketCheckView: View {
             .navigationTitle("Interaktions-Check")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    AppIconButton(showSettings: $showSettings)
+                }
                 if !basket.isEmpty {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button("Leeren") {

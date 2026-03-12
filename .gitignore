@@ -6,5 +6,8 @@ DerivedData/
 *.xcuserdata
 *.xcworkspace
 
+# Database (large file, downloaded at runtime)
+SDIF/Resources/interactions.db
+
 # macOS
 .DS_Store

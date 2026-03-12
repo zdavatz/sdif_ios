@@ -14,15 +14,32 @@ final class DatabaseManager: @unchecked Sendable {
         sqlite3_close(db)
     }
 
+    static var documentsDbPath: String {
+        let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        return docs.appendingPathComponent("interactions.db").path
+    }
+
     private func openDatabase() {
-        guard let dbPath = Bundle.main.path(forResource: "interactions", ofType: "db") else {
-            print("interactions.db not found in bundle")
+        // Prefer downloaded DB in Documents, fall back to bundled
+        let dbPath: String
+        if FileManager.default.fileExists(atPath: Self.documentsDbPath) {
+            dbPath = Self.documentsDbPath
+        } else if let bundled = Bundle.main.path(forResource: "interactions", ofType: "db") {
+            dbPath = bundled
+        } else {
+            print("interactions.db not found")
             return
         }
         if sqlite3_open_v2(dbPath, &db, SQLITE_OPEN_READONLY, nil) != SQLITE_OK {
             print("Failed to open database: \(String(cString: sqlite3_errmsg(db)))")
             db = nil
         }
+    }
+
+    func reloadDatabase() {
+        sqlite3_close(db)
+        db = nil
+        openDatabase()
     }
 
     // MARK: - Drug Search
