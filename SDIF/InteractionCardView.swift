@@ -126,6 +126,15 @@ struct InteractionCardView: View {
             } label: {
                 Label("Alles kopieren", systemImage: "doc.on.doc")
             }
+            Button {
+                let subject = drugLabel.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                let body = copyableText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                if let url = URL(string: "mailto:zdavatz@ywesee.com?subject=\(subject)&body=\(body)") {
+                    UIApplication.shared.open(url)
+                }
+            } label: {
+                Label("Feedback", systemImage: "envelope")
+            }
         }
         .padding()
         .background(Color(.systemBackground))

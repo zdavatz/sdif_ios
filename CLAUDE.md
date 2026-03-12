@@ -55,7 +55,7 @@ All heavy DB operations must use `Task.detached(priority: .userInitiated)` to av
 - Suggestion selection with multi-word terms: use `skipNextSuggest` flag to prevent `onChange` from re-triggering suggestions
 - Severity: score 0–3 mapped to colors/labels via `Int` extensions in Models.swift
 - Each tab view takes `@Binding var showSettings: Bool` from ContentView
-- InteractionCardView: `.textSelection(.enabled)` + `.contextMenu` with "Alles kopieren" for full card copy
+- InteractionCardView: `.textSelection(.enabled)` + `.contextMenu` with "Alles kopieren" for full card copy and "Feedback" to email interaction details via mailto link
 - ATS exception in project.yml for HTTP download from pillbox.oddb.org
 
 ## Database

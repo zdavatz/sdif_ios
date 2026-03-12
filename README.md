@@ -31,6 +31,7 @@ Native iOS app for the Swiss Drug Interaction Finder (SDIF). Ported from the [Ru
 - **ATC-Klassen**: Sortable overview table of ATC drug class interactions
 - **Settings**: Tap the app icon (top-left) to open settings and download the latest interaction database from pillbox.oddb.org
 - **Copy support**: Long-press interaction cards to select text or copy all card content (title, source, severity, description)
+- **Feedback**: Long-press interaction cards and choose "Feedback" to send the interaction details via email
 
 ### Interaction Detection
 
