@@ -9,5 +9,8 @@ DerivedData/
 # Database (large file, downloaded at runtime)
 SDIF/Resources/interactions.db
 
+# Build artifacts
+build/
+
 # macOS
 .DS_Store
