@@ -1,5 +1,7 @@
 # CLAUDE.md
 
+**Current Version: 1.0.2**
+
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Build Commands

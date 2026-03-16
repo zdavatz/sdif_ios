@@ -1,5 +1,7 @@
 # SDIF iOS
 
+**Current Version: 1.0.2**
+
 Native iOS app for the Swiss Drug Interaction Finder (SDIF). Ported from the [Rust web application](https://github.com/zdavatz/sdif).
 
 ## Screenshots
